@@ -45,7 +45,7 @@ button {
 /* ========== HEADER ========== */
 
 .site-header {
-  background: rgba(255, 250, 243, 0.95);
+  background: rgba(255, 250, 243, 0.97);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -54,31 +54,37 @@ button {
 
 .header-inner {
   display: flex;
-  gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 0.85rem 0;
+  gap: 1.5rem;
 }
 
 .logo {
   font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
   color: var(--bg-dark);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .main-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   align-items: center;
+  gap: 1.4rem;
+  flex: 1;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .main-nav a {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   position: relative;
   padding-bottom: 2px;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .main-nav a::after {
@@ -100,11 +106,35 @@ button {
   width: 100%;
 }
 
+/* Botón contacto destacado */
+.main-nav a.nav-cta {
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-nav a.nav-cta::after {
+  display: none;
+}
+
+.main-nav a.nav-cta:hover {
+  background: #9e4e27;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(183, 94, 52, 0.35);
+}
+
 .nav-toggle {
   display: none;
   background: transparent;
   border: none;
   font-size: 1.5rem;
+  color: var(--bg-dark);
+  flex-shrink: 0;
 }
 
 /* ========== HERO ========== */
@@ -193,11 +223,12 @@ button {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ========== SECCIONES - padding general ========== */
+/* ========== SECCIONES ========== */
 
 .intro,
 .focus,
 .highlight,
+.welcome,
 .about-section,
 .story-section,
 .services-section,
@@ -220,6 +251,35 @@ button {
   font-size: 2rem;
 }
 
+/* ========== BIENVENIDA ========== */
+
+.welcome {
+  padding: 4rem 0 2rem;
+  max-width: 720px;
+}
+
+.eyebrow-dark {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.welcome h2 {
+  font-size: 2rem;
+  margin: 0.3rem 0 1rem;
+  color: var(--bg-dark);
+}
+
+.welcome p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
 /* ========== GRIDS ========== */
 
 .cards-grid,
@@ -240,7 +300,7 @@ button {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-/* ========== CARDS INDEX - minimalistas con borde sutil ========== */
+/* ========== CARDS INDEX - minimalistas ========== */
 
 .card {
   padding: 1.4rem 1.6rem;
@@ -254,7 +314,6 @@ button {
 .card:hover {
   border-color: var(--primary);
   transform: translateY(-4px);
-  box-shadow: none;
 }
 
 .card h3 {
@@ -291,7 +350,6 @@ button {
   box-shadow: 0 22px 45px rgba(74, 54, 41, 0.16);
 }
 
-.card h3,
 .story-card h3,
 .feature-card h4,
 .contact-card h2,
@@ -315,7 +373,6 @@ button {
 
 /* ========== SECCIÓN FOCUS ========== */
 
-/* Sin fondo crema para que las cards transparentes encajen bien */
 .focus {
   background: transparent;
 }
@@ -339,7 +396,6 @@ button {
 .focus-item:hover {
   border-color: var(--primary);
   transform: translateY(-4px);
-  box-shadow: none;
 }
 
 .focus-item h3 {
@@ -674,6 +730,63 @@ blockquote footer {
   animation-play-state: paused;
 }
 
+/* ========== LIGHTBOX ========== */
+
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.88);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-overlay.open {
+  display: flex;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
+
+.lightbox-caption {
+  color: #fff;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lightbox-close:hover {
+  color: var(--accent);
+}
+
 /* ========== RESPONSIVE ========== */
 
 @media (max-width: 900px) {
@@ -704,13 +817,20 @@ blockquote footer {
   .main-nav {
     display: none;
     flex-direction: column;
-    gap: 0.8rem;
-    margin-top: 1rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
     width: 100%;
+    padding-bottom: 0.75rem;
   }
 
   .main-nav.open {
     display: flex;
+  }
+
+  .main-nav a.nav-cta {
+    width: 100%;
+    text-align: center;
   }
 
   .header-inner {
@@ -764,33 +884,4 @@ blockquote footer {
   .carousel-slide img {
     height: 250px;
   }
-}
-
-/* ========== BIENVENIDA (index) ========== */
-
-.welcome {
-  padding: 4rem 0 2rem;
-  max-width: 720px;   /* texto más estrecho, más fácil de leer */
-}
-
-.eyebrow-dark {
-  display: inline-block;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
-
-.welcome h2 {
-  font-size: 2rem;
-  margin: 0.3rem 0 1rem;
-  color: var(--bg-dark);
-}
-
-.welcome p {
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 0.8rem;
 }
